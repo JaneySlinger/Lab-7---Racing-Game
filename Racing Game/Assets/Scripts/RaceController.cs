@@ -2,6 +2,7 @@
 using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.UI;
+using UnityStandardAssets.Vehicles.Car;
 
 
 public class RaceController : MonoBehaviour
@@ -10,9 +11,11 @@ public class RaceController : MonoBehaviour
     public Text timeText;
     RaceState raceState;
     private float startTime;
+    public GameObject car_collider;
     public GameObject car;
     public int laps = 3;
     private int times_crossed = 0;
+    private GameObject[] AICars; 
 
 
     enum RaceState
@@ -27,6 +30,7 @@ public class RaceController : MonoBehaviour
     {
         StartCoroutine(startCountDown());
         raceState = RaceState.START;
+        
     }
 
     IEnumerator startCountDown()
@@ -44,6 +48,17 @@ public class RaceController : MonoBehaviour
 
         yield return new WaitForSeconds(1);
         resultText.enabled = false;
+
+        //allow the AI cars to drive when the timer is up
+        AICars = GameObject.FindGameObjectsWithTag("AICar");
+        foreach (GameObject enemyCar in AICars)
+        {
+            enemyCar.GetComponent<CarAIControl>().enabled = true;
+        }
+
+        //allow the player to drive
+        car.GetComponent<CarUserControl>().enabled = true;
+
     }
 
 
@@ -58,7 +73,7 @@ public class RaceController : MonoBehaviour
 
     private void OnTriggerEnter(Collider other) {
         //check if the car has passed over the start/finish line
-        if (other.gameObject == car)
+        if (other.gameObject == car_collider)
         {
             Debug.Log("Crossed line");
             if (times_crossed < laps && times_crossed > 0)
