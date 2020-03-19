@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.UI;
 using UnityStandardAssets.Vehicles.Car;
+using UnityEngine.SceneManagement;
 
 
 public class RaceController : MonoBehaviour
@@ -16,6 +17,7 @@ public class RaceController : MonoBehaviour
     public int laps = 3;
     private int times_crossed = 0;
     private GameObject[] AICars; 
+    public ScoreManager scoreManager;
 
 
     enum RaceState
@@ -81,10 +83,14 @@ public class RaceController : MonoBehaviour
                 resultText.enabled = true;
                 //a lap has been completed, but not the final lap
                 resultText.text = "" + (laps - times_crossed);
-            } else
+            } else if(times_crossed == laps)
             {
                 //final lap
                 resultText.text = "FINISH";
+                scoreManager.setTime((Time.time - startTime),SceneManager.GetActiveScene().buildIndex);
+                //load the menu screen
+                SceneManager.LoadScene(0);
+
             }
             times_crossed++;
         }
