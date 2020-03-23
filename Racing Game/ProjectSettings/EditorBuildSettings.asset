@@ -11,4 +11,7 @@ EditorBuildSettings:
   - enabled: 1
     path: Assets/Scenes/Track1.unity
     guid: c95e3a22139ff234db99c90d8ba95983
+  - enabled: 1
+    path: Assets/Scenes/Track2.unity
+    guid: 2238ad7c6f8fe7b468f42b82d2358838
   m_configObjects: {}

@@ -1055,7 +1055,7 @@ MonoBehaviour:
   timeText: {fileID: 165911257}
   car_collider: {fileID: 2133937075}
   car: {fileID: 368376581}
-  laps: 3
+  laps: 1
   scoreManager: {fileID: 11400000, guid: 9c1d7c5ea5641df47b1a9d1b60551e52, type: 2}
 --- !u!1 &1513783140
 GameObject:

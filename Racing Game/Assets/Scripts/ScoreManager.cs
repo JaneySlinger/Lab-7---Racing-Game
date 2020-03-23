@@ -4,13 +4,14 @@
 
 public class ScoreManager : ScriptableObject
 {
-    public float bestTime = 100.0f;
+    public float[] bestTimes = {50.0f,200.0f};
+    //public float bestTime1 = 50.0f;
+    //public float bestTime2 = 200.0f;
 
     public void setTime(float newTime, int trackNumber)
     {
-        if(bestTime > newTime)
-        {
-            bestTime = newTime;
+        if(bestTimes[trackNumber-1] > newTime){
+            bestTimes[trackNumber-1] = newTime;
         }
     }
 }
